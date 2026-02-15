@@ -1,0 +1,25 @@
+{
+  "name": "cv-design-web-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "pdf": "node generate-pdf.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/raj-allypath/cvrajvaran.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/raj-allypath/cvrajvaran/issues"
+  },
+  "homepage": "https://github.com/raj-allypath/cvrajvaran#readme",
+  "dependencies": {
+    "puppeteer": "^24.37.3"
+  }
+}
