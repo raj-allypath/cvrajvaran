@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Raj Varan — Account Executive</title>
+  <meta name="description" content="Raj Varan — Account Executive. Proven SaaS sales leader across APAC." />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <style>
+    /* ================================================================
+       DESIGN TOKENS
+       ================================================================ */
+    :root {
+      /* palette */
+      --navy: #192A56;
+      --charcoal: #2F3640;
+      --muted: #636E72;
+      --accent: #27AE60;
+      --bg: #F5F6FA;
+      --card-bg: #FFFFFF;
+      --card-border: #DFE6E9;
+      --sidebar-bg: #F0F1F5;
+      --rule: rgba(25, 42, 86, 0.12);
+
+      /* type */
+      --font-body: 'Inter', -apple-system, 'Segoe UI', sans-serif;
+      --font-mono: 'JetBrains Mono', 'Cascadia Code', 'Consolas', monospace;
+
+      /* 8px grid */
+      --g1: 8px;
+      --g2: 16px;
+      --g3: 24px;
+      --g4: 32px;
+      --g5: 40px;
+
+      /* sidebar */
+      --sidebar-w: 220px;
+      --gutter: 24px;
+    }
+
+    /* ================================================================
+       RESET & BASE
+       ================================================================ */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-body);
+      font-size: 9.5px;
+      line-height: 1.5;
+      color: var(--charcoal);
+      background: #D5D8DC;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ================================================================
+       A4 PAGE
+       ================================================================ */
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      background: var(--bg);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    @media screen {
+      .page {
+        box-shadow: 0 1px 16px rgba(0, 0, 0, 0.10);
+        margin: var(--g3) auto;
+      }
+    }
+
+    @media print {
+      body {
+        background: white;
+        margin: 0;
+        padding: 0;
+      }
+
+      .page {
+        page-break-after: always;
+        margin: 0;
+        box-shadow: none;
+      }
+
+      .page:last-child {
+        page-break-after: auto;
+      }
+
+      .no-print {
+        display: none !important;
+      }
+    }
+
+    /* ================================================================
+       HEADER
+       ================================================================ */
+    .header {
+      background: var(--navy);
+      padding: var(--g3) var(--g4);
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+    }
+
+    .header-left {}
+
+    .header h1 {
+      font-family: var(--font-body);
+      font-size: 34px;
+      font-weight: 800;
+      color: #FFFFFF;
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+
+    .header .subtitle {
+      font-size: 11px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.55);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-top: 6px;
+    }
+
+    .header .contact {
+      font-size: 9.5px;
+      color: rgba(255, 255, 255, 0.45);
+      text-align: right;
+      line-height: 1.6;
+    }
+
+    .header .contact a {
+      color: rgba(255, 255, 255, 0.55);
+      text-decoration: none;
+    }
+
+    /* ================================================================
+       GRID: sidebar + gutter + main
+       ================================================================ */
+    .body-grid {
+      display: grid;
+      grid-template-columns: var(--sidebar-w) 1fr;
+      gap: 0;
+      flex: 1;
+    }
+
+    /* Sidebar cells */
+    .s {
+      background: var(--sidebar-bg);
+      border-right: 1px solid var(--card-border);
+      padding-left: var(--g2);
+      padding-right: var(--g2);
+    }
+
+    /* Main cells */
+    .m {
+      padding-left: var(--gutter);
+      padding-right: var(--g4);
+    }
+
+    /* Row spacing via utility classes */
+    .pt-section {
+      padding-top: 20px;
+    }
+
+    .pb-section {
+      padding-bottom: 12px;
+    }
+
+    .pt-row {
+      padding-top: var(--g2);
+    }
+
+    .pb-row {
+      padding-bottom: var(--g1);
+    }
+
+    .pt-first {
+      padding-top: var(--g3);
+    }
+
+    .pb-last {
+      padding-bottom: var(--g3);
+    }
+
+    /* ================================================================
+       SECTION HEADERS
+       ================================================================ */
+    .sec-label {
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--navy);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: var(--g1);
+    }
+
+    .sec-rule {
+      border: none;
+      height: 1.5px;
+      background: var(--rule);
+      margin-bottom: var(--g2);
+    }
+
+    /* ================================================================
+       COMPANY / ROLE / DATE — visual hierarchy
+       ================================================================ */
+    .company {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.3;
+    }
+
+    .role {
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--muted);
+      margin-top: 2px;
+      line-height: 1.3;
+    }
+
+    /* ================================================================
+       BULLETS
+       ================================================================ */
+    .bl {
+      list-style: none;
+      padding: 0;
+      margin: var(--g1) 0 0 0;
+    }
+
+    .bl li {
+      padding-left: 14px;
+      text-indent: -14px;
+      margin-bottom: 3px;
+      font-size: 9.5px;
+      line-height: 1.5;
+      color: var(--charcoal);
+    }
+
+    .bl li::before {
+      content: '•';
+      color: var(--muted);
+      display: inline-block;
+      width: 14px;
+      text-indent: 0;
+      font-size: 10px;
+    }
+
+    /* ================================================================
+       ACHIEVEMENTS — small caps label
+       ================================================================ */
+    .ach-label {
+      font-family: var(--font-body);
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--navy);
+      margin-top: var(--g1);
+      margin-bottom: 4px;
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 2px;
+      display: inline-block;
+    }
+
+    /* ================================================================
+       QUOTA CARDS
+       ================================================================ */
+    .qcard {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: var(--g1) 10px;
+      margin-bottom: var(--g1);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    }
+
+    .qcard:last-child {
+      margin-bottom: 0;
+    }
+
+    .qcard h4 {
+      font-family: var(--font-body);
+      font-size: 8.5px;
+      font-weight: 700;
+      color: var(--navy);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 4px;
+    }
+
+    .qcard ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .qcard li {
+      font-family: var(--font-mono);
+      font-size: 8.5px;
+      font-weight: 500;
+      color: var(--charcoal);
+      line-height: 1.55;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .pct {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* ================================================================
+       LOGOSTRIP
+       ================================================================ */
+    .logostrip {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+    }
+
+    .logo-chip {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 5px 6px;
+      font-family: var(--font-mono);
+      font-size: 8px;
+      font-weight: 600;
+      color: var(--navy);
+      text-align: center;
+      line-height: 1.35;
+      font-variant-numeric: tabular-nums;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+    }
+
+    /* ================================================================
+       SIDEBAR SECTION LABEL
+       ================================================================ */
+    .side-label {
+      font-family: var(--font-body);
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--navy);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: var(--g1);
+    }
+
+    /* ================================================================
+       EDUCATION INLINE
+       ================================================================ */
+    .edu-title {
+      font-weight: 700;
+      font-size: 10.5px;
+      color: var(--navy);
+    }
+
+    /* ================================================================
+       DOWNLOAD BUTTON
+       ================================================================ */
+    #dl-btn {
+      position: fixed;
+      top: var(--g3);
+      right: var(--g3);
+      z-index: 100;
+      background: var(--navy);
+      color: white;
+      border: none;
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+      transition: background 0.15s;
+    }
+
+    #dl-btn:hover {
+      background: #2C3E6B;
+    }
+
+    #dl-btn svg {
+      width: 16px;
+      height: 16px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Download -->
+  <button id="dl-btn" class="no-print" onclick="downloadPDF()">
+    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round"
+        d="M12 10v6m0 0l-3-3m3 3l3-3M6 20h12a2 2 0 002-2V8l-6-6H6a2 2 0 00-2 2v14a2 2 0 002 2z" />
+    </svg>
+    Download PDF
+  </button>
+
+  <div id="cv">
+
+    <!-- ═══════════════════════════════════════════
+         PAGE 1
+         ═══════════════════════════════════════════ -->
+    <div class="page">
+
+      <div class="header">
+        <div class="header-left">
+          <h1>Raj Varan</h1>
+          <div class="subtitle">Account Executive</div>
+        </div>
+        <div class="contact">
+          <a href="mailto:rvaran1066@gmail.com">rvaran1066@gmail.com</a><br />
+          +61 435 444 143
+        </div>
+      </div>
+
+      <div class="body-grid">
+
+        <!-- ROW 1 — About Me -->
+        <div class="s pt-first pb-row">
+          <div class="side-label">Key Metrics</div>
+        </div>
+        <div class="m pt-first pb-row">
+          <div class="sec-label">About Me</div>
+          <hr class="sec-rule" />
+          <ul class="bl">
+            <li>Process-focused Account Executive with a consistent record exceeding targets across multiple SaaS
+              verticals (HR, Payroll, POS), demonstrating mastery in outbound prospecting and proven success in SMB and
+              mid-market sales cycles ($10K–$120K ACV).</li>
+            <li>Expert at mapping buyer journeys to product functionality and shaping decision criteria within the sales
+              process, consistently earning Presidents Club recognition and breaking performance records.</li>
+            <li>Versatile performer with proven success across diverse APAC markets (Australia, New Zealand, Singapore),
+              excelling in both mature and expansion territories and selling into diverse industry sectors.</li>
+          </ul>
+        </div>
+
+        <!-- ROW 2 — Knocknoc  ↔  Quota 2025 -->
+        <div class="s pt-section pb-row">
+          <div class="qcard">
+            <h4>2025 · Knocknoc</h4>
+            <ul>
+              <li><span class="pct">34.5%</span> to YTD Quota by Q3</li>
+              <li>Pipeline ~<span class="pct">$300K</span> in Q1</li>
+            </ul>
+          </div>
+        </div>
+        <div class="m pt-section pb-row">
+          <div class="sec-label">Experience</div>
+          <hr class="sec-rule" />
+          <div class="company">Knocknoc — Cybersecurity SaaS</div>
+          <div class="role">Founding Account Executive · Commercial Lead · May 2025 – Sep 2026</div>
+          <ul class="bl">
+            <li>Spearheaded go-to-market strategy for Knocknoc's Zero-Trust orchestration platform, targeting Critical
+              Infrastructure, Financial Services, and Federal sectors across AU, APAC, and U.S.</li>
+            <li>Drove multi-six-figure pipeline through outbound/inbound and partner motions, engaging CISOs, Cyber
+              Architects, and Directors of Architecture.</li>
+            <li>Led enterprise demos and POCs with global clients (Jefferies, OFX, BNY Mellon, AARNET, Ports Victoria,
+              SA Water) mapping use cases around Just-in-Time Access, Firewall Orchestration, and IEC 62443 compliance.
+            </li>
+            <li>Collaborated with Product and Engineering to refine enterprise pricing tiers and implementation
+              frameworks.</li>
+          </ul>
+          <div class="ach-label">Key Achievements</div>
+          <ul class="bl">
+            <li>Closed and expanded initial enterprise pilots, validating on-prem and cloud deployment models
+              orchestrating Palo Alto, Cisco firewalls and reverse proxies.</li>
+            <li>Built the complete GTM system including messaging frameworks and sales collateral for the Critical
+              Infrastructure ICP.</li>
+          </ul>
+        </div>
+
+        <!-- ROW 3 — Travel & Prof Dev (no quota) -->
+        <div class="s pt-row pb-row"></div>
+        <div class="m pt-row pb-row">
+          <div class="company">Travel &amp; Professional Development</div>
+          <div class="role">October 2026 – Present</div>
+          <ul class="bl">
+            <li>Strategic hiatus for international travel and personal development, focusing on cultural immersion and
+              language acquisition while researching emerging tech landscapes in international markets.</li>
+          </ul>
+        </div>
+
+        <!-- ROW 4 — Happen Business (no dedicated quota) -->
+        <div class="s pt-row pb-row"></div>
+        <div class="m pt-row pb-row">
+          <div class="company">Happen Business — Jim2 ERP (Constellation Software)</div>
+          <div class="role">Business Development Manager · Jun 2024 – May 2025</div>
+          <ul class="bl">
+            <li>Off-the-shelf, end-to-end inventory-oriented mid-market ERP software. Average Contract Value 120K+
+              Super.</li>
+            <li>Built and launched a new outbound GTM motion to open vertical markets.</li>
+          </ul>
+          <div class="ach-label">Achievements</div>
+          <ul class="bl">
+            <li>Established new GTM Motion for new verticals; created cold-calling scripts, demo flows, and positioning
+              talk tracks.</li>
+            <li>Closed record ACV deal for $177,000 including B2B Web Portal add-on.</li>
+            <li>Rebooted Partner Program — organised Partner Events.</li>
+          </ul>
+        </div>
+
+        <!-- ROW 5 — Employment Hero AE  ↔  Quota 2022–2024 -->
+        <div class="s pt-row pb-last">
+          <div class="qcard">
+            <h4>2024 · Employment Hero</h4>
+            <ul>
+              <li><span class="pct">100%</span> Half-Year — $200K Pipeline</li>
+            </ul>
+          </div>
+          <div class="qcard">
+            <h4>2023 · Employment Hero</h4>
+            <ul>
+              <li>Jan–Jul: <span class="pct">120%</span> Presidents Club</li>
+              <li>Jul–Dec: <span class="pct">123%</span> Presidents Club</li>
+            </ul>
+          </div>
+          <div class="qcard">
+            <h4>2022 · Employment Hero</h4>
+            <ul>
+              <li>Jul–Dec (Ramp): <span class="pct">125%</span></li>
+              <li>YTD: <span class="pct">70%</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="m pt-row pb-last">
+          <div class="company">Employment Hero — HR &amp; Payroll SaaS</div>
+          <div class="role">Account Executive · Jul 2022 – May 2024</div>
+          <ul class="bl">
+            <li>Attended client meetings for HR &amp; Payroll Platform, focusing on Net New Business and UpSells. Deal
+              sizes 5K–120K ARR.</li>
+            <li>Worked collaboratively with marketing, partnership, and support teams to deliver results for clients.
+            </li>
+            <li>Utilised Zoominfo and LinkedIn Sales Navigator for personalised outbound prospecting.</li>
+          </ul>
+          <div class="ach-label">Achievements</div>
+          <ul class="bl">
+            <li>Held record for highest Outbound AE opportunity closed and prospected across NZ, SG, and AU geographies.
+            </li>
+            <li>Initiated referral partnership with Shiftcare (3rd-Party CRM, NDIS Sector), generating 20K+ ARR in
+              referral income.</li>
+            <li>Conducted comprehensive competitor analysis on Rippling and presented findings to the AE team.</li>
+            <li>Led outbound training webinars and provided mentorship to SDR team members.</li>
+          </ul>
+        </div>
+
+      </div><!-- /body-grid -->
+    </div><!-- /page 1 -->
+
+    <!-- ═══════════════════════════════════════════
+         PAGE 2
+         ═══════════════════════════════════════════ -->
+    <div class="page">
+
+      <div class="header">
+        <div class="header-left">
+          <h1>Raj Varan</h1>
+          <div class="subtitle">Account Executive</div>
+        </div>
+        <div class="contact">
+          <a href="mailto:rvaran1066@gmail.com">rvaran1066@gmail.com</a><br />
+          +61 435 444 143
+        </div>
+      </div>
+
+      <div class="body-grid">
+
+        <!-- ROW 1 — EH SDR  ↔  Quota 2021 -->
+        <div class="s pt-first pb-row">
+          <div class="side-label">Key Metrics</div>
+          <div class="qcard">
+            <h4>2021 · EH SDR</h4>
+            <ul>
+              <li>Jul–Sep (Ramp): <span class="pct">100%</span></li>
+              <li>Sep–Dec: <span class="pct">110%</span></li>
+              <li>Jan–Mar: <span class="pct">120%</span></li>
+              <li>Apr–May: <span class="pct">100%</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="m pt-first pb-row">
+          <div class="company">Employment Hero</div>
+          <div class="role">Outbound SDR · Jun 2021 – Jun 2022</div>
+          <ul class="bl">
+            <li>Scheduled Demo appointments for Account Executives across three products: HR, Payroll, and Employer of
+              Record. Target of 20 Outbound Demos per period.</li>
+            <li>Conducted outbound outreach based on Signal and Content Downloads. Promoted to Account Executive.</li>
+          </ul>
+          <div class="ach-label">Achievements</div>
+          <ul class="bl">
+            <li>#1 SDR by meeting set for Employer of Record service line — 25% of all meetings set (Pure-Hunting,
+              Educating Market Outreach).</li>
+            <li>Selected by SDR Management to mentor new starters. Only SDR globally to attain target in Dec 2020.</li>
+          </ul>
+        </div>
+
+        <!-- ROW 2 — SparkHire  ↔  Quota 2020 -->
+        <div class="s pt-section pb-row">
+          <div class="qcard">
+            <h4>2020 · SparkHire</h4>
+            <ul>
+              <li>Mar–Jun (Ramp): <span class="pct">120%</span></li>
+              <li>Jul–Dec: <span class="pct">110%</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="m pt-section pb-row">
+          <div class="company">SparkHire — HR SaaS</div>
+          <div class="role">Outbound + Inbound SDR · Feb 2020 – Jun 2021</div>
+          <ul class="bl">
+            <li>2nd Sales-Hire in APAC Region expansion team. Scheduled Demo appointments for Spark Hire's Video
+              Interview Software.</li>
+            <li>Consistent dial volume of 45–60 dials; target 20 OB meetings. First boots on the ground in a small
+              in-country team of four.</li>
+            <li>Developed competency in Outreach, Zoominfo, LinkedIn Sales Navigator, Vidyard, Salesforce, and
+              ChiliPiper.</li>
+          </ul>
+          <div class="ach-label">Achievements</div>
+          <ul class="bl">
+            <li>Developed GTM strategy with USA Leadership to navigate COVID-19. Set appointments for Xero, Telstra
+              Health, Accenture, BlueScope Steel.</li>
+            <li>Overachieved during ramp-up (Mar–Jun). 2nd Highest Outbound ARR Pipeline globally in 2020–21 across APAC
+              / EMEA / US.</li>
+          </ul>
+        </div>
+
+        <!-- ROW 3 — Vend/LightSpeed  ↔  Quota 2019 -->
+        <div class="s pt-section pb-row">
+          <div class="qcard">
+            <h4>2019 · Vend / LightSpeed</h4>
+            <ul>
+              <li>Jun–Aug (Ramp): <span class="pct">95%</span></li>
+              <li>Sep: <span class="pct">160%</span> · Oct: <span class="pct">130%</span></li>
+              <li>Nov: <span class="pct">100%</span> · Dec: <span class="pct">100%</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="m pt-section pb-row">
+          <div class="company">Vend (now LightSpeed) — POS + Inventory Management SaaS</div>
+          <div class="role">Outbound + Inbound SDR · May 2019 – Feb 2020</div>
+          <ul class="bl">
+            <li>Scheduled Demo appointments for a pool of Account Executives. Purely outbound outreach via content
+              downloads and call lists.</li>
+            <li>Clients ranged from single-store owners to multi-site organisations across NZ and AU. Tailored pitch by
+              financial position (growth vs. cost-focused).</li>
+          </ul>
+          <div class="ach-label">Achievements</div>
+          <ul class="bl">
+            <li>Selected for Win-back Campaign for churned customers by AE Team Leaders. Consistent Quota Attainment +
+              Over-achievement.</li>
+          </ul>
+        </div>
+
+        <!-- ROW 4 — Notable Logos  ↔  Education -->
+        <div class="s pt-section pb-last">
+          <div class="side-label" style="margin-top:4px;">Notable Logos</div>
+          <div class="logostrip">
+            <div class="logo-chip">RSPCA QLD<br /><span class="pct">$86K</span></div>
+            <div class="logo-chip">Ravenswood Gold<br /><span class="pct">$123K</span></div>
+            <div class="logo-chip">SUPA<br /><span class="pct">$49K</span></div>
+            <div class="logo-chip">VAPO NZ<br /><span class="pct">$75K</span></div>
+            <div class="logo-chip" style="grid-column: span 2;">DJB Group <span class="pct">$31K SG</span></div>
+          </div>
+        </div>
+        <div class="m pt-section pb-last">
+          <div class="sec-label">Education</div>
+          <hr class="sec-rule" />
+
+          <div class="edu-title" style="font-style: italic;">Sales Courses</div>
+          <div style="margin-top:4px;">
+            <span style="font-weight:600;">Presidents Club:</span>
+            Discovery Masterclass (Chris Orlob) · Writing a Business Case (Nate Nasralla)
+          </div>
+          <div style="margin-top:4px;">
+            <span style="font-weight:700; color: var(--navy);">John Barrows</span> — Driving To Close (Certification)
+          </div>
+
+          <div class="edu-title" style="margin-top: var(--g2);">Monash University</div>
+          <ul class="bl" style="margin-top: 4px;">
+            <li>Bachelor of Commerce (Accounting and Finance)</li>
+            <li>Bachelor of Laws</li>
+          </ul>
+
+          <div style="margin-top: var(--g3); font-size: 9px; color: var(--muted); font-style: italic;">
+            References Available Upon Request
+          </div>
+        </div>
+
+      </div><!-- /body-grid -->
+    </div><!-- /page 2 -->
+
+  </div><!-- /cv -->
+
+  <script>
+    function downloadPDF() {
+      const el = document.getElementById('cv');
+      const btn = document.getElementById('dl-btn');
+      btn.style.display = 'none';
+      html2pdf().set({
+        margin: 0,
+        filename: 'Raj_Varan_CV.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true, letterRendering: true },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+        pagebreak: { mode: ['css', 'legacy'], before: '.page' }
+      }).from(el).save().then(() => btn.style.display = '').catch(() => btn.style.display = '');
+    }
+  </script>
+
+</body>
+
+</html>
