@@ -55,6 +55,12 @@ export default function Home() {
           <span>🔗 Public Profile</span>
         </Link>
         <DownloadButton />
+        <Link
+          href="/login"
+          className="bg-red-600 text-white px-4 py-3 rounded-full shadow-lg font-medium hover:bg-red-700 transition flex items-center gap-2"
+        >
+          <span>Admin Login</span>
+        </Link>
       </div>
 
       <CVRenderer />
