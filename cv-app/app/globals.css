@@ -1,0 +1,448 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+
+  /* CV Palette */
+  --navy: #192A56;
+  --charcoal: #2F3640;
+  --muted: #636E72;
+  --accent: #27AE60;
+  --bg: #F5F6FA;
+  --card-bg: #FFFFFF;
+  --card-border: #DFE6E9;
+  --sidebar-bg: #F0F1F5;
+  --rule: rgba(25, 42, 86, 0.12);
+
+  /* Admin Design Tokens */
+  --primary: #192b57;
+  --admin-amber: #F59E0B;
+  --admin-red: #EF4444;
+  --background-light: #f5f6fa;
+  --background-dark: #13171f;
+  --border-gray: #dfe6e9;
+  --slate-500: #64748b;
+  --slate-600: #475569;
+  --slate-700: #334155;
+  --slate-900: #0f172a;
+
+  /* Dimensions */
+  --g1: 8px;
+  --g2: 16px;
+  --g3: 24px;
+  --g4: 32px;
+  --g5: 40px;
+  --sidebar-w: 220px;
+  --gutter: 24px;
+}
+
+body {
+  color: var(--charcoal);
+  background: #D5D8DC;
+  /* Web background for contrast */
+  font-family: var(--font-inter), sans-serif;
+  font-size: 9.5px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Page Container */
+.page {
+  width: 210mm;
+  min-height: 297mm;
+  background: var(--bg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Screen Only Styles */
+@media screen {
+  .page {
+    box-shadow: 0 1px 16px rgba(0, 0, 0, 0.10);
+    margin: var(--g3) auto;
+  }
+}
+
+/* Print Styles */
+@media print {
+  @page {
+    margin: 0;
+  }
+
+  body {
+    background: white;
+    margin: 0;
+    padding: 0;
+  }
+
+  .page {
+    margin: 0;
+    box-shadow: none;
+    break-after: page;
+  }
+
+  .page:last-child {
+    break-after: auto;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+}
+
+/* Typography & Layout Utilities */
+h1 {
+  font-family: var(--font-inter);
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.font-mono {
+  font-family: var(--font-mono), monospace;
+}
+
+/* Header */
+.header {
+  background: var(--navy);
+  padding: var(--g3) var(--g4);
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+/* Body Grid */
+.body-grid {
+  display: grid;
+  grid-template-columns: var(--sidebar-w) 1fr;
+  gap: 0;
+  flex: 1;
+}
+
+/* Side Column */
+.s {
+  background: var(--sidebar-bg);
+  border-right: 1px solid var(--card-border);
+  padding-left: var(--g2);
+  padding-right: var(--g2);
+}
+
+/* Main Column */
+.m {
+  padding-left: var(--gutter);
+  padding-right: var(--g4);
+}
+
+/* Spacing Helpers */
+.pt-section {
+  padding-top: 20px;
+}
+
+.pb-section {
+  padding-bottom: 12px;
+}
+
+.pt-row {
+  padding-top: var(--g2);
+}
+
+.pb-row {
+  padding-bottom: var(--g1);
+}
+
+.pt-first {
+  padding-top: var(--g3);
+}
+
+.pb-last {
+  padding-bottom: var(--g3);
+}
+
+/* Components */
+.sec-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--navy);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: var(--g1);
+}
+
+.sec-rule {
+  border: none;
+  height: 1.5px;
+  background: var(--rule);
+  margin-bottom: var(--g2);
+}
+
+.company {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.3;
+}
+
+.role {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--muted);
+  margin-top: 2px;
+  line-height: 1.3;
+}
+
+.ach-label {
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--navy);
+  margin-top: var(--g1);
+  margin-bottom: 4px;
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 2px;
+  display: inline-block;
+}
+
+.side-label {
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--navy);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: var(--g1);
+}
+
+/* Bullet Lists */
+.bl {
+  list-style: none;
+  padding: 0;
+  margin: var(--g1) 0 0 0;
+}
+
+.bl li {
+  padding-left: 14px;
+  text-indent: -14px;
+  margin-bottom: 3px;
+  font-size: 9.5px;
+  line-height: 1.5;
+  color: var(--charcoal);
+}
+
+.bl li::before {
+  content: '•';
+  color: var(--muted);
+  display: inline-block;
+  width: 14px;
+  text-indent: 0;
+  font-size: 10px;
+}
+
+/* Quota Cards */
+.qcard {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  padding: var(--g1) 10px;
+  margin-bottom: var(--g1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.qcard:last-child {
+  margin-bottom: 0;
+}
+
+.qcard h4 {
+  font-size: 8.5px;
+  font-weight: 700;
+  color: var(--navy);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 4px;
+}
+
+.qcard ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.qcard li {
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  font-weight: 500;
+  color: var(--charcoal);
+  line-height: 1.55;
+  font-variant-numeric: tabular-nums;
+}
+
+.pct {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* Logostrip */
+.logostrip {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.logo-chip {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 6px;
+  padding: 5px 6px;
+  font-family: var(--font-mono);
+  font-size: 8px;
+  font-weight: 600;
+  color: var(--navy);
+  text-align: center;
+  line-height: 1.35;
+  font-variant-numeric: tabular-nums;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+}
+
+/* Education */
+.edu-title {
+  font-weight: 700;
+  font-size: 10.5px;
+  color: var(--navy);
+}
+
+/* Download Button */
+#dl-btn {
+  position: fixed;
+  top: var(--g3);
+  right: var(--g3);
+  z-index: 100;
+  background: var(--navy);
+  color: white;
+  border: none;
+  font-family: var(--font-inter);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+  transition: background 0.15s;
+}
+
+#dl-btn:hover {
+  background: #2C3E6B;
+}
+
+/* Material Symbols for admin UI */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  vertical-align: middle;
+}
+
+/* Toggle switch - peer-checked navy */
+.peer:checked+div {
+  background-color: #192b57;
+}
+
+/* Material Symbols for admin UI */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  vertical-align: middle;
+}
+
+/* Admin UI Badge Styles */
+.badge-internal {
+  @apply inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider;
+  background-color: rgba(245, 158, 11, 0.2);
+  color: #F59E0B;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.badge-cv-visible {
+  @apply inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider;
+  background-color: rgba(34, 197, 94, 0.2);
+  color: #22c55e;
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+/* Admin Form Styles */
+.admin-input {
+  @apply w-full px-3 py-2.5 rounded-lg border transition-all duration-200;
+  border-color: #d3d8e3;
+  background-color: rgba(245, 246, 248, 0.5);
+}
+
+.admin-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 1px var(--primary);
+}
+
+.admin-input::placeholder {
+  @apply text-slate-400;
+}
+
+/* Admin Card */
+.admin-card {
+  @apply bg-white rounded-xl border border-slate-200 shadow-sm;
+}
+
+.admin-card:hover {
+  @apply shadow-md;
+}
+
+/* Admin Button Primary */
+.btn-primary {
+  @apply inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg font-semibold text-white transition-all duration-200;
+  background-color: var(--primary);
+}
+
+.btn-primary:hover {
+  background-color: rgba(25, 43, 87, 0.9);
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+/* Admin Button Secondary */
+.btn-secondary {
+  @apply inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg font-medium transition-all duration-200;
+  background-color: #e9ebf1;
+  color: var(--slate-700);
+}
+
+.btn-secondary:hover {
+  background-color: #dfe2e9;
+}
+
+/* Admin Button Danger */
+.btn-danger {
+  @apply inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg font-semibold text-white transition-all duration-200;
+  background-color: var(--admin-red);
+}
+
+.btn-danger:hover {
+  background-color: #dc2626;
+}
+
+/* Section Divider */
+.section-divider {
+  @apply relative flex items-center py-4;
+}
+
+.section-divider::before {
+  content: '';
+  @apply absolute inset-0 border-t border-dashed border-slate-300;
+}
+
+.section-divider span {
+  @apply relative px-3 bg-white text-[10px] font-black uppercase tracking-[0.2em] text-slate-500;
+}
